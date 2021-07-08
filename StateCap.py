@@ -1,9 +1,9 @@
 """We have an existing dictionary that maps US states to their capitals.
-1. Print the state capital of Idaho
-2. Print all states.
-3. Print all capitals.
-4. Create a single string 'Alabama -> Montgomery, Alaska -> Juneau, ...'
-5. Ensure the string you created in 4. is alphabetically sorted by state
+1. Print the state capital of Idaho  VV
+2. Print all states.   VV
+3. Print all capitals.  VV
+4. Create a single string 'Alabama -> Montgomery, Alaska -> Juneau, ...'  VV
+5. Ensure the string you created in 4. is alphabetically sorted by state  X
 7. Now we want to add the reverse look up, given the name of a capital what state
 is it in?
 Implement the function def get_state(capital): below so it returns the state.
@@ -70,25 +70,31 @@ STATES_CAPITALS = {
 
 
 def capital_of_Idaho():
-    # Your code here
-    pass
+    return STATES_CAPITALS.get("Idaho")
 
 def all_states():
-    # Your code here
-    pass
+    all_states_list = []
+    for k in STATES_CAPITALS.keys():
+        all_states_list.append(k)
+    return all_states_list
+
 
 def all_capitals():
-    # Your code here
-    pass
+    all_capitals_list = []
+    for v in STATES_CAPITALS.values():
+        all_capitals_list.append(v)
+    return all_capitals_list
+
 
 def states_capitals_string():
-    # Your code here
-    pass
-
+    return "".join(f"{key} -> {value}, " for key, value in STATES_CAPITALS.items())
 
 
 def get_state(capital):
-    pass
+    for key, value in STATES_CAPITALS.items():
+        if value == capital:
+            return key
+    raise KeyError("No valid Capital")
 
 
 
@@ -109,10 +115,15 @@ def test_capital_to_state_unknown():
     with pytest.raises(KeyError):
         get_state('')
 
-
 def main():
-    return pytest.main(__file__)
+    return pytest.main([__file__])
 
 
 if __name__ == '__main__':
     sys.exit(main())
+    print(capital_of_Idaho())
+    print(all_states())
+    print(all_capitals())
+    print(states_capitals_string())
+    print(get_state('Indianapolis'))
+    print(get_state(''))
